@@ -1,0 +1,24 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 1. 获取当前时间
+    const hour = new Date().getHours();
+    let greeting = "";
+
+    if (hour >= 5 && hour < 12) {
+      greeting = "Good morning ☀️";
+    } else if (hour >= 12 && hour < 18) {
+      greeting = "Good afternoon ☕";
+    } else {
+      greeting = "Good evening 🌙";
+    }
+
+    // 2. 找到 PaperMod 主题首页的标题元素
+    const titleElement = document.querySelector(".home-info .entry-header h1");
+
+    // 3. 如果找到了（说明在首页），就把问候语加在标题前面
+    if (titleElement) {
+      // 这里可以自定义你的后缀文字，我保留了“欢迎来到我的博客”
+      titleElement.textContent = greeting + ",have a sit and enjoy your stay!";
+    }
+  });
+</script>
