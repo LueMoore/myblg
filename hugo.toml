@@ -32,3 +32,5 @@ theme = "PaperMod"
     ShowReadingTime = true
     ShowShareButtons = false
     ShowPostNavLinks = true
+[params.assets]
+    favicon = "favicon.png"
