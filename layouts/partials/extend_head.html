@@ -22,3 +22,104 @@
     }
   });
 </script>
+
+<!-- 1. 引入优雅的中文字体 (霞鹜文楷) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" />
+
+<style>
+  /* ====== 1. 突破 PaperMod 默认的 800px 宽度限制 ====== */
+  .main {
+    max-width: 1400px !important; /* 强制把页面拉宽到 1400px */
+    padding: 0 2rem !important;    /* 给左右留一点呼吸空间 */
+  }
+  @media (max-width: 768px) {
+    .main { padding: 0 1rem !important; } /* 手机端缩小边距 */
+  }
+
+  /* ====== 2. 全局字体与背景（保留之前的） ====== */
+  body {
+    font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 40%, #020617 100%) !important;
+    background-attachment: fixed !important;
+  }
+  .dark body {
+    background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 40%, #020617 100%) !important;
+  }
+
+  /* ====== 3. 三栏布局：挨着两侧 ====== */
+  .home-grid {
+    display: flex;
+    gap: 2rem; /* 把间距拉大点 */
+    align-items: flex-start;
+    max-width: 1400px; /* 匹配上面的宽度 */
+    margin: 2rem auto;
+    padding: 0;
+    width: 100%;
+    justify-content: space-between; /* 关键：让左右两边靠边，中间自动分配 */
+  }
+
+  /* 左右侧边栏：固定宽度 240px，并且粘性定位 */
+  .sidebar-card {
+    flex: 0 0 240px; 
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+  }
+
+  /* 中间栏：占据剩余的所有宽度 */
+  .main-card {
+    flex: 1; /* 撑满剩余空间 */
+    min-width: 0; /* 防止被长文章撑破布局 */
+  }
+
+  /* ====== 4. 卡片样式与动效（保留之前的） ====== */
+  .sidebar-card, .main-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .sidebar-card:hover, .main-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+
+  .sidebar-card h2, .main-card h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  /* ====== 5. 文章列表与标签样式（保留之前的） ====== */
+  .post-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    transition: padding-left 0.2s ease;
+  }
+  .post-item:hover { padding-left: 5px; }
+  .post-item h3 a { color: #e2e8f0; text-decoration: none; font-size: 1.1rem; transition: color 0.2s; }
+  .post-item h3 a:hover { color: #60a5fa; }
+  .post-item p { font-size: 0.85rem; color: #94a3b8; margin: 0.5rem 0; }
+  .post-date { font-size: 0.75rem; color: #64748b; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .tag {
+    background: rgba(51, 65, 85, 0.6); color: #e2e8f0; padding: 4px 12px;
+    border-radius: 20px; text-decoration: none; font-size: 0.8rem; transition: all 0.2s;
+  }
+  .tag:hover { background: #3b82f6; color: white; transform: scale(1.05); }
+
+  /* ====== 6. 移动端适配 ====== */
+  @media (max-width: 1024px) {
+    .home-grid { flex-direction: column; }
+    .sidebar-card { position: static; flex: 1; width: 100%; }
+  }
+</style>

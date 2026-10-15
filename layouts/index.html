@@ -1,23 +1,14 @@
 {{- define "main" }}
 
-<!-- 1. 注入 CSS：强行拓宽 PaperMod 的页面容器 -->
-<style>
-  .main {
-    max-width: 1200px !important; /* 覆盖默认的 800px 限制 */
-  }
-</style>
-
-<!-- 2. 首页问候语 -->
 {{- partial "home_info.html" . }}
 
-<!-- 3. 三栏布局容器 -->
-<div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; justify-content: space-between; align-items: flex-start;">
+<!-- 三栏布局容器 -->
+<div class="home-grid">
 
-  <!-- 左侧栏：关于我 (限制最大宽度，防止太宽) -->
-  <div style="flex: 0 0 220px; background: #1e293b; padding: 1.5rem; border-radius: 12px;">
-    <h2 style="font-size: 1.2rem; border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem; display: inline-block;">👋 关于我</h2>
-    <p style="margin-top: 1rem; color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
-      你好，我是 LueMoore。记录学习、生活和代码折腾。
+  <!-- 左侧栏：关于我 -->
+  <aside class="sidebar-card left-card">
+    <h2>👋 关于我</h2>
+    <p>你好，我是 LueMoore。记录学习、生活和代码折腾。</p>
       <br>
       欢迎访问我的博客，分享我的学习笔记和生活点滴。
       <br>
@@ -32,35 +23,31 @@
       <br>
       <a href="https://twitter.com/yourusername" style="color: #3b82f6; text-decoration: underline;">Twitter</a>
     </p>
-  </div>  
+  </aside>
 
-  <!-- 中间栏：最新文章 (占据剩余空间) -->
-  <div style="flex: 1 1 500px; background: #1e293b; padding: 1.5rem; border-radius: 12px;">
-    <h2 style="font-size: 1.2rem; border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem; display: inline-block;">📝 最新文章</h2>
-    <div style="margin-top: 1rem;">
+  <!-- 中间栏：最新文章 -->
+  <main class="main-card">
+    <h2>📝 最新文章</h2>
+    <div class="post-list">
       {{ range first 5 (where .Site.RegularPages "Type" "posts") }}
-        <article style="border-bottom: 1px solid #334155; padding-bottom: 1rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">
-            <a href="{{ .Permalink }}" style="text-decoration: none; color: #e2e8f0;">{{ .Title }}</a>
-          </h3>
-          <p style="font-size: 0.85rem; color: #94a3b8; margin: 0.5rem 0;">{{ .Summary | plainify | truncate 60 }}</p>
-          <span style="font-size: 0.75rem; color: #64748b;">{{ .Date.Format "2006-01-02" }}</span>
+        <article class="post-item">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p>{{ .Summary | plainify | truncate 80 }}</p>
+          <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
         </article>
       {{ end }}
     </div>
-  </div>
+  </main>
 
-  <!-- 右侧栏：标签云 (限制最大宽度) -->
-  <div style="flex: 0 0 220px; background: #1e293b; padding: 1.5rem; border-radius: 12px;">
-    <h2 style="font-size: 1.2rem; border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem; display: inline-block;">🏷️ 标签</h2>
-    <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 8px;">
+  <!-- 右侧栏：标签云 -->
+  <aside class="sidebar-card right-card">
+    <h2>🏷️ 标签</h2>
+    <div class="tags">
       {{ range .Site.Taxonomies.tags }}
-        <a href="{{ .Page.Permalink }}" style="background: #334155; color: #e2e8f0; padding: 4px 10px; border-radius: 6px; text-decoration: none; font-size: 0.8rem;">
-          {{ .Page.Title }} ({{ .Count }})
-        </a>
+        <a href="{{ .Page.Permalink }}" class="tag">{{ .Page.Title }} ({{ .Count }})</a>
       {{ end }}
     </div>
-  </div>
+  </aside>
 
 </div>
 
